@@ -21,6 +21,7 @@ require (
 	github.com/schollz/stringsizer v1.1.0
 	github.com/schollz/utils v1.0.0
 	github.com/shurcooL/sanitized_anchor_name v0.0.0-20170918181015-86672fcb3f95 // indirect
+	github.com/stretchr/testify v1.2.2
 	github.com/tdewolff/minify v2.3.5+incompatible // indirect
 	github.com/tdewolff/parse v2.3.3+incompatible // indirect
 	github.com/ugorji/go v1.1.1 // indirect
@@ -31,3 +32,5 @@ require (
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 	gopkg.in/yaml.v2 v2.2.1
 )
+
+go 1.13

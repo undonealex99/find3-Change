@@ -11,11 +11,12 @@ type ByLocationDevice struct {
 	NumScanners int       `json:"num_scanners"`
 	ActiveMins  int       `json:"active_mins"`
 	FirstSeen   time.Time `json:"first_seen"`
+	Location    string    `json:"location"`
 }
 
 type ByLocation struct {
 	Devices  []ByLocationDevice `json:"devices"`
-	Location string             `json:"location"`
-	GPS      GPS                `json:"gps,omitempty"`
-	Total    int                `json:"total"`
+	//Location string             `json:"location"`
+	//GPS      GPS                `json:"gps,omitempty"`
+	Total    map[string]int     `json:"total"`
 }

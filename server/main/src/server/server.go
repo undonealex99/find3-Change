@@ -498,7 +498,7 @@ func Run() (err error) {
 					table = append(table, DeviceTable{
 						ID:           utils.Hash(device.Device),
 						Name:         device.Device,
-						LastLocation: byLocation.Location,
+						LastLocation: device.Location,
 						LastSeen:     device.Timestamp,
 						Probability:  int64(device.Probability * 100),
 						ActiveTime:   int64(device.ActiveMins),
@@ -733,13 +733,13 @@ func handlerApiV1ByLocation(c *gin.Context) {
 		}
 
 		byLocations, err = api.GetByLocation(family, minutesAgoInt, showRandomized, activeMinsThreshold, minScanners, minProbability, make(map[string]int))
+		fmt.Println(byLocations)
 		return
 	}(c)
 	if err != nil {
-		c.JSON(http.StatusOK, gin.H{"message": err.Error(), "success": err == nil})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error(), "success": err == nil})
 	} else {
-
-		c.JSON(http.StatusOK, gin.H{"message": "got locations", "success": err == nil, "locations": locations})
+		c.JSON(http.StatusOK, locations[0])
 	}
 }
 

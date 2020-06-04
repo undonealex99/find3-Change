@@ -396,6 +396,7 @@ func GetByLocation(family string, minutesAgoInt int, showRandomized bool, active
 			Randomized:  isRandomized,
 			NumScanners: numScanners,
 			FirstSeen:   deviceFirstTime[s.Device],
+			Location:    s.Location,
 		}
 		if errGotRollingData == nil {
 			dL.ActiveMins = int(deviceCounts[s.Device]) * int(rollingData.TimeBlock.Seconds()) / 60
@@ -409,15 +410,21 @@ func GetByLocation(family string, minutesAgoInt int, showRandomized bool, active
 		locations[a[0].Location] = append(locations[a[0].Location], dL)
 	}
 
-	byLocations = make([]models.ByLocation, len(locations))
-	i = 0
-	gpsData, _ := GetGPSData(family)
+	byLocations = make([]models.ByLocation, 1)
+	Total := make(map[string]int, len(locations))
+	//i = 0
+	//gpsData, _ := GetGPSData(family)
 	for location := range locations {
-		byLocations[i].GPS = gpsData[location].GPS
-		byLocations[i].Location = location
-		byLocations[i].Devices = locations[location]
-		byLocations[i].Total = len(locations[location])
-		i++
+		//byLocations[i].GPS = gpsData[location].GPS
+		//byLocations[i].Location = location
+		// byLocations[i].Devices = locations[location]
+		// Total[location] = len(locations[location])
+		// byLocations[i].Total = Total
+		// i++
+		data := locations[location]
+		byLocations[0].Devices = append(byLocations[0].Devices, data...)
+		Total[location] = len(locations[location])
+		byLocations[0].Total = Total
 	}
 	return
 }
